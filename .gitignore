@@ -1,0 +1,61 @@
+# Byte-compiled / cached
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Virtualenvs
+.env
+.venv/
+venv/
+env/
+ENV/
+
+# Python packaging
+build/
+dist/
+*.egg-info/
+pip-wheel-metadata/
+
+# Django
+*.log
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+media/
+staticfiles/
+# se usar collectstatic para STATIC_ROOT, ignore a pasta de saída
+/static/
+# arquivos de migração compilados
+**/migrations/*.pyc
+**/migrations/__pycache__/
+
+# Testing / coverage
+.pytest_cache/
+.coverage
+coverage.xml
+htmlcov/
+
+# Celery
+celerybeat-schedule
+
+# Node / frontend
+node_modules/
+npm-debug.log*
+yarn-error.log
+
+# IDEs / editors
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# dotenv / secrets
+.env.local
+.env.* 

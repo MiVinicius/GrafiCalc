@@ -1,0 +1,443 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> programa
+Rule 1     programa -> comando
+Rule 2     programa -> programa comando
+Rule 3     comando -> MOSTRAR DADOS DE ID
+Rule 4     comando -> CARREGAR DADOS DE STRING COMO ID
+Rule 5     comando -> CALCULAR tipo_calculo DA COLUNA STRING DE ID
+Rule 6     tipo_calculo -> MEDIA
+Rule 7     tipo_calculo -> MEDIANA
+Rule 8     tipo_calculo -> MODA
+Rule 9     comando -> PLOTAR GRAFICO DE tipo_grafico COM EIXO_X STRING E EIXO_Y STRING DE ID SALVAR COMO STRING
+Rule 10    comando -> PLOTAR GRAFICO DE tipo_grafico COM EIXO_X STRING E EIXO_Y STRING DE ID
+Rule 11    comando -> CARREGAR ARQUIVO COMO ID
+Rule 12    tipo_grafico -> BARRAS
+Rule 13    tipo_grafico -> LINHAS
+
+Terminals, with rules where they appear
+
+ARQUIVO              : 11
+BARRAS               : 12
+CALCULAR             : 5
+CARREGAR             : 4 11
+COLUNA               : 5
+COM                  : 9 10
+COMO                 : 4 9 11
+DA                   : 5
+DADOS                : 3 4
+DE                   : 3 4 5 9 9 10 10
+E                    : 9 10
+EIXO_X               : 9 10
+EIXO_Y               : 9 10
+GRAFICO              : 9 10
+ID                   : 3 4 5 9 10 11
+LINHAS               : 13
+MEDIA                : 6
+MEDIANA              : 7
+MODA                 : 8
+MOSTRAR              : 3
+PLOTAR               : 9 10
+SALVAR               : 9
+STRING               : 4 5 9 9 9 10 10
+error                : 
+
+Nonterminals, with rules where they appear
+
+comando              : 1 2
+programa             : 2 0
+tipo_calculo         : 5
+tipo_grafico         : 9 10
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . programa
+    (1) programa -> . comando
+    (2) programa -> . programa comando
+    (3) comando -> . MOSTRAR DADOS DE ID
+    (4) comando -> . CARREGAR DADOS DE STRING COMO ID
+    (5) comando -> . CALCULAR tipo_calculo DA COLUNA STRING DE ID
+    (9) comando -> . PLOTAR GRAFICO DE tipo_grafico COM EIXO_X STRING E EIXO_Y STRING DE ID SALVAR COMO STRING
+    (10) comando -> . PLOTAR GRAFICO DE tipo_grafico COM EIXO_X STRING E EIXO_Y STRING DE ID
+    (11) comando -> . CARREGAR ARQUIVO COMO ID
+
+    MOSTRAR         shift and go to state 3
+    CARREGAR        shift and go to state 4
+    CALCULAR        shift and go to state 5
+    PLOTAR          shift and go to state 6
+
+    programa                       shift and go to state 1
+    comando                        shift and go to state 2
+
+state 1
+
+    (0) S' -> programa .
+    (2) programa -> programa . comando
+    (3) comando -> . MOSTRAR DADOS DE ID
+    (4) comando -> . CARREGAR DADOS DE STRING COMO ID
+    (5) comando -> . CALCULAR tipo_calculo DA COLUNA STRING DE ID
+    (9) comando -> . PLOTAR GRAFICO DE tipo_grafico COM EIXO_X STRING E EIXO_Y STRING DE ID SALVAR COMO STRING
+    (10) comando -> . PLOTAR GRAFICO DE tipo_grafico COM EIXO_X STRING E EIXO_Y STRING DE ID
+    (11) comando -> . CARREGAR ARQUIVO COMO ID
+
+    MOSTRAR         shift and go to state 3
+    CARREGAR        shift and go to state 4
+    CALCULAR        shift and go to state 5
+    PLOTAR          shift and go to state 6
+
+    comando                        shift and go to state 7
+
+state 2
+
+    (1) programa -> comando .
+
+    MOSTRAR         reduce using rule 1 (programa -> comando .)
+    CARREGAR        reduce using rule 1 (programa -> comando .)
+    CALCULAR        reduce using rule 1 (programa -> comando .)
+    PLOTAR          reduce using rule 1 (programa -> comando .)
+    $end            reduce using rule 1 (programa -> comando .)
+
+
+state 3
+
+    (3) comando -> MOSTRAR . DADOS DE ID
+
+    DADOS           shift and go to state 8
+
+
+state 4
+
+    (4) comando -> CARREGAR . DADOS DE STRING COMO ID
+    (11) comando -> CARREGAR . ARQUIVO COMO ID
+
+    DADOS           shift and go to state 9
+    ARQUIVO         shift and go to state 10
+
+
+state 5
+
+    (5) comando -> CALCULAR . tipo_calculo DA COLUNA STRING DE ID
+    (6) tipo_calculo -> . MEDIA
+    (7) tipo_calculo -> . MEDIANA
+    (8) tipo_calculo -> . MODA
+
+    MEDIA           shift and go to state 12
+    MEDIANA         shift and go to state 13
+    MODA            shift and go to state 14
+
+    tipo_calculo                   shift and go to state 11
+
+state 6
+
+    (9) comando -> PLOTAR . GRAFICO DE tipo_grafico COM EIXO_X STRING E EIXO_Y STRING DE ID SALVAR COMO STRING
+    (10) comando -> PLOTAR . GRAFICO DE tipo_grafico COM EIXO_X STRING E EIXO_Y STRING DE ID
+
+    GRAFICO         shift and go to state 15
+
+
+state 7
+
+    (2) programa -> programa comando .
+
+    MOSTRAR         reduce using rule 2 (programa -> programa comando .)
+    CARREGAR        reduce using rule 2 (programa -> programa comando .)
+    CALCULAR        reduce using rule 2 (programa -> programa comando .)
+    PLOTAR          reduce using rule 2 (programa -> programa comando .)
+    $end            reduce using rule 2 (programa -> programa comando .)
+
+
+state 8
+
+    (3) comando -> MOSTRAR DADOS . DE ID
+
+    DE              shift and go to state 16
+
+
+state 9
+
+    (4) comando -> CARREGAR DADOS . DE STRING COMO ID
+
+    DE              shift and go to state 17
+
+
+state 10
+
+    (11) comando -> CARREGAR ARQUIVO . COMO ID
+
+    COMO            shift and go to state 18
+
+
+state 11
+
+    (5) comando -> CALCULAR tipo_calculo . DA COLUNA STRING DE ID
+
+    DA              shift and go to state 19
+
+
+state 12
+
+    (6) tipo_calculo -> MEDIA .
+
+    DA              reduce using rule 6 (tipo_calculo -> MEDIA .)
+
+
+state 13
+
+    (7) tipo_calculo -> MEDIANA .
+
+    DA              reduce using rule 7 (tipo_calculo -> MEDIANA .)
+
+
+state 14
+
+    (8) tipo_calculo -> MODA .
+
+    DA              reduce using rule 8 (tipo_calculo -> MODA .)
+
+
+state 15
+
+    (9) comando -> PLOTAR GRAFICO . DE tipo_grafico COM EIXO_X STRING E EIXO_Y STRING DE ID SALVAR COMO STRING
+    (10) comando -> PLOTAR GRAFICO . DE tipo_grafico COM EIXO_X STRING E EIXO_Y STRING DE ID
+
+    DE              shift and go to state 20
+
+
+state 16
+
+    (3) comando -> MOSTRAR DADOS DE . ID
+
+    ID              shift and go to state 21
+
+
+state 17
+
+    (4) comando -> CARREGAR DADOS DE . STRING COMO ID
+
+    STRING          shift and go to state 22
+
+
+state 18
+
+    (11) comando -> CARREGAR ARQUIVO COMO . ID
+
+    ID              shift and go to state 23
+
+
+state 19
+
+    (5) comando -> CALCULAR tipo_calculo DA . COLUNA STRING DE ID
+
+    COLUNA          shift and go to state 24
+
+
+state 20
+
+    (9) comando -> PLOTAR GRAFICO DE . tipo_grafico COM EIXO_X STRING E EIXO_Y STRING DE ID SALVAR COMO STRING
+    (10) comando -> PLOTAR GRAFICO DE . tipo_grafico COM EIXO_X STRING E EIXO_Y STRING DE ID
+    (12) tipo_grafico -> . BARRAS
+    (13) tipo_grafico -> . LINHAS
+
+    BARRAS          shift and go to state 26
+    LINHAS          shift and go to state 27
+
+    tipo_grafico                   shift and go to state 25
+
+state 21
+
+    (3) comando -> MOSTRAR DADOS DE ID .
+
+    MOSTRAR         reduce using rule 3 (comando -> MOSTRAR DADOS DE ID .)
+    CARREGAR        reduce using rule 3 (comando -> MOSTRAR DADOS DE ID .)
+    CALCULAR        reduce using rule 3 (comando -> MOSTRAR DADOS DE ID .)
+    PLOTAR          reduce using rule 3 (comando -> MOSTRAR DADOS DE ID .)
+    $end            reduce using rule 3 (comando -> MOSTRAR DADOS DE ID .)
+
+
+state 22
+
+    (4) comando -> CARREGAR DADOS DE STRING . COMO ID
+
+    COMO            shift and go to state 28
+
+
+state 23
+
+    (11) comando -> CARREGAR ARQUIVO COMO ID .
+
+    MOSTRAR         reduce using rule 11 (comando -> CARREGAR ARQUIVO COMO ID .)
+    CARREGAR        reduce using rule 11 (comando -> CARREGAR ARQUIVO COMO ID .)
+    CALCULAR        reduce using rule 11 (comando -> CARREGAR ARQUIVO COMO ID .)
+    PLOTAR          reduce using rule 11 (comando -> CARREGAR ARQUIVO COMO ID .)
+    $end            reduce using rule 11 (comando -> CARREGAR ARQUIVO COMO ID .)
+
+
+state 24
+
+    (5) comando -> CALCULAR tipo_calculo DA COLUNA . STRING DE ID
+
+    STRING          shift and go to state 29
+
+
+state 25
+
+    (9) comando -> PLOTAR GRAFICO DE tipo_grafico . COM EIXO_X STRING E EIXO_Y STRING DE ID SALVAR COMO STRING
+    (10) comando -> PLOTAR GRAFICO DE tipo_grafico . COM EIXO_X STRING E EIXO_Y STRING DE ID
+
+    COM             shift and go to state 30
+
+
+state 26
+
+    (12) tipo_grafico -> BARRAS .
+
+    COM             reduce using rule 12 (tipo_grafico -> BARRAS .)
+
+
+state 27
+
+    (13) tipo_grafico -> LINHAS .
+
+    COM             reduce using rule 13 (tipo_grafico -> LINHAS .)
+
+
+state 28
+
+    (4) comando -> CARREGAR DADOS DE STRING COMO . ID
+
+    ID              shift and go to state 31
+
+
+state 29
+
+    (5) comando -> CALCULAR tipo_calculo DA COLUNA STRING . DE ID
+
+    DE              shift and go to state 32
+
+
+state 30
+
+    (9) comando -> PLOTAR GRAFICO DE tipo_grafico COM . EIXO_X STRING E EIXO_Y STRING DE ID SALVAR COMO STRING
+    (10) comando -> PLOTAR GRAFICO DE tipo_grafico COM . EIXO_X STRING E EIXO_Y STRING DE ID
+
+    EIXO_X          shift and go to state 33
+
+
+state 31
+
+    (4) comando -> CARREGAR DADOS DE STRING COMO ID .
+
+    MOSTRAR         reduce using rule 4 (comando -> CARREGAR DADOS DE STRING COMO ID .)
+    CARREGAR        reduce using rule 4 (comando -> CARREGAR DADOS DE STRING COMO ID .)
+    CALCULAR        reduce using rule 4 (comando -> CARREGAR DADOS DE STRING COMO ID .)
+    PLOTAR          reduce using rule 4 (comando -> CARREGAR DADOS DE STRING COMO ID .)
+    $end            reduce using rule 4 (comando -> CARREGAR DADOS DE STRING COMO ID .)
+
+
+state 32
+
+    (5) comando -> CALCULAR tipo_calculo DA COLUNA STRING DE . ID
+
+    ID              shift and go to state 34
+
+
+state 33
+
+    (9) comando -> PLOTAR GRAFICO DE tipo_grafico COM EIXO_X . STRING E EIXO_Y STRING DE ID SALVAR COMO STRING
+    (10) comando -> PLOTAR GRAFICO DE tipo_grafico COM EIXO_X . STRING E EIXO_Y STRING DE ID
+
+    STRING          shift and go to state 35
+
+
+state 34
+
+    (5) comando -> CALCULAR tipo_calculo DA COLUNA STRING DE ID .
+
+    MOSTRAR         reduce using rule 5 (comando -> CALCULAR tipo_calculo DA COLUNA STRING DE ID .)
+    CARREGAR        reduce using rule 5 (comando -> CALCULAR tipo_calculo DA COLUNA STRING DE ID .)
+    CALCULAR        reduce using rule 5 (comando -> CALCULAR tipo_calculo DA COLUNA STRING DE ID .)
+    PLOTAR          reduce using rule 5 (comando -> CALCULAR tipo_calculo DA COLUNA STRING DE ID .)
+    $end            reduce using rule 5 (comando -> CALCULAR tipo_calculo DA COLUNA STRING DE ID .)
+
+
+state 35
+
+    (9) comando -> PLOTAR GRAFICO DE tipo_grafico COM EIXO_X STRING . E EIXO_Y STRING DE ID SALVAR COMO STRING
+    (10) comando -> PLOTAR GRAFICO DE tipo_grafico COM EIXO_X STRING . E EIXO_Y STRING DE ID
+
+    E               shift and go to state 36
+
+
+state 36
+
+    (9) comando -> PLOTAR GRAFICO DE tipo_grafico COM EIXO_X STRING E . EIXO_Y STRING DE ID SALVAR COMO STRING
+    (10) comando -> PLOTAR GRAFICO DE tipo_grafico COM EIXO_X STRING E . EIXO_Y STRING DE ID
+
+    EIXO_Y          shift and go to state 37
+
+
+state 37
+
+    (9) comando -> PLOTAR GRAFICO DE tipo_grafico COM EIXO_X STRING E EIXO_Y . STRING DE ID SALVAR COMO STRING
+    (10) comando -> PLOTAR GRAFICO DE tipo_grafico COM EIXO_X STRING E EIXO_Y . STRING DE ID
+
+    STRING          shift and go to state 38
+
+
+state 38
+
+    (9) comando -> PLOTAR GRAFICO DE tipo_grafico COM EIXO_X STRING E EIXO_Y STRING . DE ID SALVAR COMO STRING
+    (10) comando -> PLOTAR GRAFICO DE tipo_grafico COM EIXO_X STRING E EIXO_Y STRING . DE ID
+
+    DE              shift and go to state 39
+
+
+state 39
+
+    (9) comando -> PLOTAR GRAFICO DE tipo_grafico COM EIXO_X STRING E EIXO_Y STRING DE . ID SALVAR COMO STRING
+    (10) comando -> PLOTAR GRAFICO DE tipo_grafico COM EIXO_X STRING E EIXO_Y STRING DE . ID
+
+    ID              shift and go to state 40
+
+
+state 40
+
+    (9) comando -> PLOTAR GRAFICO DE tipo_grafico COM EIXO_X STRING E EIXO_Y STRING DE ID . SALVAR COMO STRING
+    (10) comando -> PLOTAR GRAFICO DE tipo_grafico COM EIXO_X STRING E EIXO_Y STRING DE ID .
+
+    SALVAR          shift and go to state 41
+    MOSTRAR         reduce using rule 10 (comando -> PLOTAR GRAFICO DE tipo_grafico COM EIXO_X STRING E EIXO_Y STRING DE ID .)
+    CARREGAR        reduce using rule 10 (comando -> PLOTAR GRAFICO DE tipo_grafico COM EIXO_X STRING E EIXO_Y STRING DE ID .)
+    CALCULAR        reduce using rule 10 (comando -> PLOTAR GRAFICO DE tipo_grafico COM EIXO_X STRING E EIXO_Y STRING DE ID .)
+    PLOTAR          reduce using rule 10 (comando -> PLOTAR GRAFICO DE tipo_grafico COM EIXO_X STRING E EIXO_Y STRING DE ID .)
+    $end            reduce using rule 10 (comando -> PLOTAR GRAFICO DE tipo_grafico COM EIXO_X STRING E EIXO_Y STRING DE ID .)
+
+
+state 41
+
+    (9) comando -> PLOTAR GRAFICO DE tipo_grafico COM EIXO_X STRING E EIXO_Y STRING DE ID SALVAR . COMO STRING
+
+    COMO            shift and go to state 42
+
+
+state 42
+
+    (9) comando -> PLOTAR GRAFICO DE tipo_grafico COM EIXO_X STRING E EIXO_Y STRING DE ID SALVAR COMO . STRING
+
+    STRING          shift and go to state 43
+
+
+state 43
+
+    (9) comando -> PLOTAR GRAFICO DE tipo_grafico COM EIXO_X STRING E EIXO_Y STRING DE ID SALVAR COMO STRING .
+
+    MOSTRAR         reduce using rule 9 (comando -> PLOTAR GRAFICO DE tipo_grafico COM EIXO_X STRING E EIXO_Y STRING DE ID SALVAR COMO STRING .)
+    CARREGAR        reduce using rule 9 (comando -> PLOTAR GRAFICO DE tipo_grafico COM EIXO_X STRING E EIXO_Y STRING DE ID SALVAR COMO STRING .)
+    CALCULAR        reduce using rule 9 (comando -> PLOTAR GRAFICO DE tipo_grafico COM EIXO_X STRING E EIXO_Y STRING DE ID SALVAR COMO STRING .)
+    PLOTAR          reduce using rule 9 (comando -> PLOTAR GRAFICO DE tipo_grafico COM EIXO_X STRING E EIXO_Y STRING DE ID SALVAR COMO STRING .)
+    $end            reduce using rule 9 (comando -> PLOTAR GRAFICO DE tipo_grafico COM EIXO_X STRING E EIXO_Y STRING DE ID SALVAR COMO STRING .)
+
