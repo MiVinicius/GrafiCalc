@@ -24,7 +24,6 @@ pip-wheel-metadata/
 local_settings.py
 db.sqlite3
 db.sqlite3-journal
-media/
 staticfiles/
 # se usar collectstatic para STATIC_ROOT, ignore a pasta de saída
 /static/
