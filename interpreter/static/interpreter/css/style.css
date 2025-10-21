@@ -1,0 +1,192 @@
+/* layout base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Segoe UI", Roboto, sans-serif;
+    display: flex;
+    height: 100vh;
+    background-color: #f5f6fa;
+    color: #333;
+}
+
+.container {
+    display: flex;
+    width: 100%;
+}
+
+/* Editor */
+.editor {
+    width: 45%;
+    background-color: #2d2d2d;
+    color: #fff;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.editor h1 {
+    color: #4CAF50;
+    border-bottom: 2px solid #4CAF50;
+    padding-bottom: 5px;
+    margin-bottom: 15px;
+}
+
+.editor-form {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.file-upload {
+    margin-bottom: 15px;
+}
+
+.file-upload label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.file-upload input[type="file"] {
+    background-color: #1e1e1e;
+    border: 1px solid #3c3c3c;
+    color: #d4d4d4;
+    padding: 10px;
+    width: 100%;
+}
+
+.codigo-label {
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+textarea {
+    width: 100%;
+    flex-grow: 1;
+    background-color: #1e1e1e;
+    color: #d4d4d4;
+    border: 1px solid #3c3c3c;
+    font-size: 15px;
+    padding: 10px;
+    border-radius: 5px;
+    resize: none;
+}
+
+button {
+    margin-top: 15px;
+    padding: 14px;
+    background-color: #4CAF50;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 17px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+/* Área de saída */
+.output {
+    width: 55%;
+    background-color: #fff;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+.output h2 {
+    color: #333;
+    border-bottom: 2px solid #4CAF50;
+    padding-bottom: 5px;
+    margin-bottom: 15px;
+}
+
+/* Resultados */
+.resultado {
+    margin-bottom: 20px;
+    padding: 15px;
+    border-radius: 6px;
+    border-left: 5px solid;
+}
+
+.resultado.message {
+    border-color: #2196F3;
+    background-color: #e3f2fd;
+}
+
+.resultado.error {
+    border-color: #f44336;
+    background-color: #ffebee;
+    color: #c62828;
+}
+
+.resultado img {
+    max-width: 100%;
+    height: auto;
+    border: 1px solid #ccc;
+    margin-top: 10px;
+    border-radius: 5px;
+}
+
+/* Download */
+.download-link {
+    margin-top: 15px;
+    text-align: center;
+}
+
+.download-link a {
+    display: inline-block;
+    padding: 10px 18px;
+    background-color: #007BFF;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.2s ease;
+}
+
+.download-link a:hover {
+    background-color: #0069d9;
+}
+
+/* Tabelas */
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.data-table th,
+.data-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+.data-table th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
+
+.data-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+/* Responsividade */
+@media (max-width: 900px) {
+    body {
+        flex-direction: column;
+    }
+
+    .editor,
+    .output {
+        width: 100%;
+        height: auto;
+    }
+}

@@ -1,49 +1,33 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Interpretador GrafiCalc</title>
-    <style>
-        body { font-family: sans-serif; display: flex; height: 100vh; margin: 0; background-color: #f4f4f9; }
-        .container { display: flex; width: 100%; }
-        .editor, .output { padding: 20px; box-sizing: border-box; }
-        .editor { width: 45%; background-color: #2d2d2d; color: white; display: flex; flex-direction: column; }
-        .output { width: 55%; background-color: #ffffff; overflow-y: auto; }
-        textarea { width: 100%; flex-grow: 1; background-color: #1e1e1e; color: #d4d4d4; border: 1px solid #3c3c3c; font-size: 16px; padding: 10px; resize: none; }
-        button { display: block; width: 100%; padding: 15px; background-color: #4CAF50; color: white; border: none; font-size: 18px; cursor: pointer; margin-top: 10px; }
-        button:hover { background-color: #45a049; }
-        h1, h2 { color: #e0e0e0; border-bottom: 2px solid #4CAF50; padding-bottom: 5px; }
-        h2 { color: #333; }
-        .resultado { margin-bottom: 15px; padding: 10px; border-radius: 5px; border-left: 5px solid; }
-        .message { border-color: #2196F3; background-color: #e3f2fd; }
-        .error { border-color: #f44336; background-color: #ffebee; color: #c62828; }
-        .image img { max-width: 100%; height: auto; border: 1px solid #ccc; }
-        .download-link { margin-top: 15px; text-align: center; }
-        .download-link a { display: inline-block; padding: 10px 18px; background-color: #007BFF; /* Azul */color: white; text-decoration: none; border-radius: 5px; font-weight: bold; transition: background-color 0.2s; }
-        .data-table { width: 100%; border-collapse: collapse; /* Remove espaços entre as células */ margin-top: 10px; }
-        .data-table th, 
-        .data-table td { border: 1px solid #ddd; padding: 8px; text-align: left;}
-        .data-table th { background-color: #f2f2f2; /* Cor de fundo para o cabeçalho */ font-weight: bold; }
-        .data-table tr:nth-child(even) { background-color: #f9f9f9; /* Linhas alternadas com cores diferentes */ }
-    </style>
+    <title>GrafiCalc Web</title>
+    <link rel="stylesheet" href="{% static 'interpreter/css/style.css' %}">
 </head>
 <body>
     <div class="container">
         <div class="editor">
             <h1>GrafiCalc Web</h1>
-            <form method="post" enctype="multipart/form-data" style="display: flex; flex-direction: column; flex-grow: 1;">
+
+            <form method="post" enctype="multipart/form-data" class="editor-form">
                 {% csrf_token %}
                 <div class="file-upload">
-                    <label for="arquivo_dados">1. Faça o upload do seu ficheiro (.csv ou .xlsx)</label>
-                    <input type="file" name="arquivo_dados" id="arquivo_dados">
+                    <label for="arquivo_dados">1️ - Faça o upload do seu ficheiro (.csv ou .xlsx)</label>
+                    <input type="file" name="arquivo_dados" id="arquivo_dados" accept=".csv, .xlsx">
                 </div>
-                <label for="codigo_area" style="margin-bottom: 5px; font-weight: bold;">2. Escreva o seu código</label>
-                <textarea name="codigo" id="codigo_area" placeholder='Use CARREGAR ARQUIVO COMO nome_variavel para abrir o seu ficheiro. Exemplo:&#10;CARREGAR ARQUIVO COMO meus_dados&#10;PLOTAR GRAFICO DE BARRAS COM EIXO_X "ColunaA" E EIXO_Y "ColunaB" DE meus_dados SALVAR COMO "grafico.png"'>{{ codigo_submetido }}</textarea>
+
+                <label for="codigo_area" class="codigo-label">2️ - Escreva o seu código</label>
+                <textarea name="codigo" id="codigo_area" placeholder='Use CARREGAR ARQUIVO COMO nome_variavel para abrir o seu ficheiro. Exemplo:
+CARREGAR ARQUIVO COMO meus_dados
+PLOTAR GRAFICO DE BARRAS COM EIXO_X "ColunaA" E EIXO_Y "ColunaB" DE meus_dados SALVAR COMO "grafico.png"'>{{ codigo_submetido }}</textarea>
                 
-                <button type="submit">Executar</button>
+                <button type="submit"> Executar</button>
             </form>
         </div>
+
         <div class="output">
             <h2>Resultados</h2>
             {% for res in resultados %}
@@ -59,7 +43,7 @@
                         
                         <div class="download-link">
                             <a href="data:image/png;base64,{{ res.content }}" download="{{ res.filename }}">
-                                Fazer Download
+                                 Fazer Download
                             </a>
                         </div>
                     {% endif %}
