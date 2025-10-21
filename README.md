@@ -140,10 +140,10 @@ PLOTAR GRAFICO DE LINHAS COM EIXO_X "Mes" E EIXO_Y "Faturamento" DE dados_de_ven
     MOSTRAR DADOS DE financeiro
 
     # Calcula a receita média mensal
-    CALCULAR MEDIA DA COLUNA "Receita" DE financeiro
+    CALCULAR MEDIA DA COLUNA "Faturamento" DE financeiro
 
-    # Cria um gráfico para visualizar a receita ao longo dos meses
-    PLOTAR GRAFICO DE LINHAS COM EIXO_X "Mes" E EIXO_Y "Receita" DE financeiro SALVAR COMO "relatorio_receita.png"
+    # Cria um gráfico para visualizar o Faturamento ao longo dos meses
+    PLOTAR GRAFICO DE LINHAS COM EIXO_X "Mes" E EIXO_Y "Faturamento" DE financeiro SALVAR COMO "relatorio_f.png"
     ```
 3.  **Clique em "Executar"** para ver todos os resultados, incluindo a tabela e o gráfico com o botão de download.
 
