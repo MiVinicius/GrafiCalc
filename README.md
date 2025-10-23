@@ -151,31 +151,33 @@ PLOTAR GRAFICO DE LINHAS COM EIXO_X "Mes" E EIXO_Y "Faturamento" DE dados_de_ven
 
 ## 📁 Estrutura do Projeto
 
+```text
 graficalc/
-        ├── venv/                   
-        ├── graficalc_project/
-        │   ├── __init__.py      
-        │   ├── settings.py         
-        │   ├── urls.py
-        │   ├── wsgi.py             
-        │   └── asgi.py
-        ├── interpreter/            
-        │   ├── migrations/
-        │   ├── static/
-        │   │    └── interpreter/
-        │   │         └── css/
-        │   │              └── style.css           
-        │   ├── templates/          
-        │   │    └── interpreter/
-        │   │         └── interface.html  
-        │   ├── __init__.py
-        │   ├── admin.py
-        │   ├── apps.py
-        │   ├── graficalc_engine.py                        
-        │   ├── models.py
-        │   ├── tests.py
-        │   ├── urls.py             
-        │   └── views.py
-        ├── requirements.txt                                                       
-        ├── manage.py               
-        └── README.md
+├── venv/
+├── graficalc_project/
+│   ├── init.py
+│   ├── settings.py
+│   ├── urls.py
+│   ├── wsgi.py
+│   └── asgi.py
+├── interpreter/
+│   ├── migrations/
+│   ├── static/
+│   │    └── interpreter/
+│   │         └── css/
+│   │              └── style.css
+│   ├── templates/
+│   │    └── interpreter/
+│   │         └── interface.html
+│   ├── init.py
+│   ├── admin.py
+│   ├── apps.py
+│   ├── graficalc_engine.py
+│   ├── models.py
+│   ├── tests.py
+│   ├── urls.py
+│   └── views.py
+├── requirements.txt
+├── manage.py
+└── README.md
+```
