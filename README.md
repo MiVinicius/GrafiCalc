@@ -2,7 +2,7 @@
 
 GrafiCalc é uma aplicação web completa que implementa uma linguagem de programação de alto nível, em português, focada em análise e visualização de dados de forma rápida e interativa. A plataforma permite que utilizadores façam o upload de seus próprios ficheiros de dados (.csv ou .xlsx) e utilizem comandos simples para inspecionar os dados, realizar cálculos estatísticos e gerar gráficos diretamente no navegador.
 
-Este projeto foi construído com fins didáticos para demonstrar a criação de uma linguagem do zero (análise léxica e sintática com PLY) e sua integração com um framework web moderno como o Django.
+Este projeto foi construído com fins didáticos para demonstrar a criação de uma linguagem do zero (análise léxica e sintática com PLY) e sua integração com um framework web como o Django.
 
 ---
 
@@ -17,7 +17,7 @@ Este projeto foi construído com fins didáticos para demonstrar a criação de 
     * [CALCULAR](#3-calcular)
     * [PLOTAR GRÁFICO](#4-plotar-gráfico)
 * [Exemplo Completo de Utilização](#-exemplo-completo-de-utilização)
-
+* [Estrutura do Projeto](#-estrutura-do-projeto)
 ---
 
 ## ✨ Principais Funcionalidades
@@ -111,7 +111,7 @@ Realiza cálculos estatísticos (`MEDIA`, `MEDIANA`, `MODA`) numa coluna.
 **Exemplo:** `CALCULAR MEDIA DA COLUNA "Total" DE dados_de_vendas`
 
 ### 4. PLOTAR GRÁFICO
-Gera um gráfico de `BARRAS` ou `LINHAS`. A cláusula `SALVAR COMO` é opcional e ativa o botão de download.
+Gera um gráfico de `BARRAS` ou `LINHAS`. A cláusula `SALVAR COMO` é opcional.
 
 **Sintaxe:**
 PLOTAR GRAFICO DE <tipo> COM EIXO_X "<col_x>" E EIXO_Y "<col_y>" DE <variavel> [SALVAR COMO "<arquivo.png>"]
@@ -121,7 +121,7 @@ PLOTAR GRAFICO DE <tipo> COM EIXO_X "<col_x>" E EIXO_Y "<col_y>" DE <variavel> [
 
 PLOTAR GRAFICO DE BARRAS COM EIXO_X "Produto" E EIXO_Y "Quantidade" DE dados_de_vendas
 
-**Gráfico com opção de download**
+**Gráfico para um possível download**
 
 PLOTAR GRAFICO DE LINHAS COM EIXO_X "Mes" E EIXO_Y "Faturamento" DE dados_de_vendas SALVAR COMO "faturamento_mensal.png"
 
@@ -145,6 +145,35 @@ PLOTAR GRAFICO DE LINHAS COM EIXO_X "Mes" E EIXO_Y "Faturamento" DE dados_de_ven
     # Cria um gráfico para visualizar o Faturamento ao longo dos meses
     PLOTAR GRAFICO DE LINHAS COM EIXO_X "Mes" E EIXO_Y "Faturamento" DE financeiro SALVAR COMO "relatorio_f.png"
     ```
-3.  **Clique em "Executar"** para ver todos os resultados, incluindo a tabela e o gráfico com o botão de download.
+3.  **Clique em "Executar"** para ver todos os resultados, incluindo a tabela e o gráfico.
 
 ---
+
+## 📁 Estrutura do Projeto
+
+graficalc/
+├── venv/                   
+├── graficalc_project/      
+│   ├── settings.py         
+│   ├── urls.py             
+│   └── ...
+├── interpreter/            
+│   ├── migrations/
+│   ├── static/
+│   │	 └── interpreter/
+│   │	 	  └── css/
+│   │	 	  	   └── style.css/           
+│   ├── templates/          
+│   │   └── interpreter/
+│   │       └── interface.html  
+│   ├── __init__.py
+│   ├── admin.py
+│   ├── apps.py
+│   ├── graficalc_engine.py                        
+│   ├── models.py
+│   ├── tests.py
+│   ├── urls.py             
+│   └── views.py
+├── requirements.txt                                                       
+├── manage.py               
+└── README.md   

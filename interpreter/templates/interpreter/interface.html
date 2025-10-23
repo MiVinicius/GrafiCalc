@@ -11,7 +11,7 @@
     <div class="container">
         <div class="editor">
             <h1>GrafiCalc Web</h1>
-
+                <button type="button" class="help-button" id="openHelpModal">? Ajuda</button>
             <form method="post" enctype="multipart/form-data" class="editor-form">
                 {% csrf_token %}
                 <div class="file-upload">
@@ -22,7 +22,7 @@
                 <label for="codigo_area" class="codigo-label">2️ - Escreva o seu código</label>
                 <textarea name="codigo" id="codigo_area" placeholder='Use CARREGAR ARQUIVO COMO nome_variavel para abrir o seu ficheiro. Exemplo:
 CARREGAR ARQUIVO COMO meus_dados
-PLOTAR GRAFICO DE BARRAS COM EIXO_X "ColunaA" E EIXO_Y "ColunaB" DE meus_dados SALVAR COMO "grafico.png"'>{{ codigo_submetido }}</textarea>
+PLOTAR GRAFICO DE BARRAS COM EIXO_X "ColunaA" E EIXO_Y "ColunaB" DE meus_dados (SALVAR COMO "grafico.png" é opcional)'>{{ codigo_submetido }}</textarea>
                 
                 <button type="submit"> Executar</button>
             </form>
@@ -50,6 +50,69 @@ PLOTAR GRAFICO DE BARRAS COM EIXO_X "ColunaA" E EIXO_Y "ColunaB" DE meus_dados S
                 </div>
             {% endfor %}
         </div>
+        
     </div>
+    <div id="helpModal" class="modal-overlay">
+            <div class="modal-content">
+                <span class="modal-close" id="closeHelpModal">&times;</span>
+                <h2>Referência Rápida de Comandos</h2>
+                <p>Abaixo estão todos os comandos disponíveis na linguagem GrafiCalc.</p>
+
+                <div class="comando-ajuda">
+                    <h4>1. CARREGAR ARQUIVO</h4>
+                    <p>Carrega o ficheiro que acabou de enviar para uma variável.</p>
+                    <pre><code>CARREGAR ARQUIVO COMO nome_da_variavel</code></pre>
+                    <p><strong>Exemplo:</strong> <code>CARREGAR ARQUIVO COMO minhas_vendas</code></p>
+                </div>
+
+                <div class="comando-ajuda">
+                    <h4>2. MOSTRAR DADOS</h4>
+                    <p>Exibe as primeiras 5 linhas de uma variável já carregada.</p>
+                    <pre><code>MOSTRAR DADOS DE nome_da_variavel</code></pre>
+                    <p><strong>Exemplo:</strong> <code>MOSTRAR DADOS DE minhas_vendas</code></p>
+                </div>
+
+                <div class="comando-ajuda">
+                    <h4>3. CALCULAR</h4>
+                    <p>Calcula a média, mediana ou moda de uma coluna específica.</p>
+                    <pre><code>CALCULAR <TIPO> DA COLUNA "<nome_coluna>" DE <variavel></code></pre>
+                    <p><strong>Tipos:</strong> <code>MEDIA</code>, <code>MEDIANA</code>, <code>MODA</code></p>
+                    <p><strong>Exemplo:</strong> <code>CALCULAR MEDIA DA COLUNA "Faturamento" DE minhas_vendas</code></p>
+                </div>
+
+                <div class="comando-ajuda">
+                    <h4>4. PLOTAR GRÁFICO</h4>
+                    <p>Gera um gráfico de barras ou linhas. O <code>SALVAR COMO</code> é opcional e ativa o download.</p>
+                    <pre><code>PLOTAR GRAFICO DE <TIPO> COM EIXO_X "<col_x>" E EIXO_Y "<col_y>" DE <variavel></code></pre>
+                    <pre><code>PLOTAR ... [SALVAR COMO "<nome_arquivo.png>"]</code></pre>
+                    <p><strong>Tipos:</strong> <code>BARRAS</code>, <code>LINHAS</code></p>
+                    <p><strong>Exemplo:</strong> <code>PLOTAR GRAFICO DE BARRAS COM EIXO_X "Produto" E EIXO_Y "Quantidade" DE minhas_vendas</code></p>
+                </div>
+
+            </div>
+        </div>
+        <script>
+            
+            var modal = document.getElementById("helpModal");
+            var btn = document.getElementById("openHelpModal");
+            var span = document.getElementById("closeHelpModal");
+
+            
+            btn.onclick = function() {
+                modal.style.display = "block";
+            }
+
+            
+            span.onclick = function() {
+                modal.style.display = "none";
+            }
+
+            
+            window.onclick = function(event) {
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                }
+            }
+        </script>
 </body>
 </html>

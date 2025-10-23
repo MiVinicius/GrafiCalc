@@ -9,19 +9,14 @@ import os
 import io
 import base64
 
-# --- Memória da Linguagem ---
-# Este dicionário irá armazenar os dataframes carregados pelo utilizador.
-# A chave será o nome da variável (ex: 'vendas') e o valor será o dataframe do pandas.
+
 variaveis = {}
-
-# --- Armazenamento de Resultados ---
-# Uma lista para guardar os resultados de cada comando executado.
-# Isso permite-nos processar múltiplos comandos e retornar todos os resultados.
 resultados_execucao = []
+caminho_arquivo_upload_temporario = None
 
-# -----------------------------------------------------------------------------
+
 # LEXER 
-# -----------------------------------------------------------------------------
+
 reserved = {
     'CARREGAR': 'CARREGAR', 'DADOS': 'DADOS', 'DE': 'DE', 'COMO': 'COMO',
     'MOSTRAR': 'MOSTRAR', 'CALCULAR': 'CALCULAR', 'MEDIA': 'MEDIA',
@@ -55,9 +50,8 @@ def t_error(t):
 
 lexer = lex.lex()
 
-# -----------------------------------------------------------------------------
-# PARSER com LÓGICA DE EXECUÇÃO
-# -----------------------------------------------------------------------------
+
+# PARSER
 
 def p_programa(p):
     '''
@@ -77,13 +71,8 @@ def p_comando_mostrar(p):
 
     try:
         df = variaveis[nome_variavel]
-        # Pega nas primeiras 5 linhas com o método head() do pandas
         df_head = df.head()
-        
-        # Converte o dataframe para uma tabela HTML.
         tabela_html = df_head.to_html(classes='data-table', border=0, index=False, justify='left')
-        
-        # Adiciona o resultado como um novo tipo: 'table'
         resultados_execucao.append({
             'type': 'table', 
             'content': tabela_html,
@@ -135,14 +124,13 @@ def p_comando_calcular(p):
         return
 
     try:
-        coluna = df[nome_coluna].dropna() # Remove valores nulos para cálculos
+        coluna = df[nome_coluna].dropna() 
         resultado = 0
         if tipo_calculo.upper() == 'MEDIA':
             resultado = coluna.mean()
         elif tipo_calculo.upper() == 'MEDIANA':
             resultado = coluna.median()
         elif tipo_calculo.upper() == 'MODA':
-            # A moda pode retornar múltiplos valores, pegamos o primeiro.
             resultado = stats.mode(coluna, keepdims=False)[0]
 
         msg = f"A {tipo_calculo} da coluna '{nome_coluna}' é: {resultado:.2f}"
@@ -171,22 +159,18 @@ def p_comando_plotar(p):
             | PLOTAR GRAFICO DE tipo_grafico COM EIXO_X STRING E EIXO_Y STRING DE ID
     '''
     
-    # Verificamos o tamanho de 'p' para saber qual regra foi usada.
-    # Se len(p) for 16, a regra longa (com SALVAR COMO) foi usada.
-    # Se len(p) for 13, a regra curta (sem SALVAR COMO) foi usada.
-    
-    if len(p) == 16: # Regra com 'SALVAR COMO'
+    if len(p) == 16: 
         tipo_grafico = p[4]
         coluna_x = p[7]
         coluna_y = p[10]
         nome_variavel = p[12]
         nome_ficheiro_saida = p[15]
-    else: # Regra sem 'SALVAR COMO' (len(p) == 13)
+    else: 
         tipo_grafico = p[4]
         coluna_x = p[7]
         coluna_y = p[10]
         nome_variavel = p[12]
-        nome_ficheiro_saida = "grafico_gerado.png" # Usamos um nome padrão
+        nome_ficheiro_saida = "grafico_gerado.png" 
 
     if nome_variavel not in variaveis:
         msg = f"Erro: A variável de dados '{nome_variavel}' não existe."
@@ -228,10 +212,6 @@ def p_comando_carregar_arquivo(p):
     'comando : CARREGAR ARQUIVO COMO ID'
     nome_variavel = p[4]
 
-    # A magia acontece aqui: o caminho do ficheiro não virá do comando,
-    # mas sim de um argumento que a nossa view irá passar.
-    # Usaremos uma variável global temporária para isso.
-
     if not caminho_arquivo_upload_temporario:
         msg = "Erro: O comando 'CARREGAR ARQUIVO' só pode ser usado com um upload de ficheiro."
         resultados_execucao.append({'type': 'error', 'content': msg})
@@ -271,36 +251,27 @@ def p_error(p):
 
 parser = yacc.yacc()
 
-# --- Função Principal de Execução ---
-# Esta será a única função que o nosso Django irá chamar.
-caminho_arquivo_upload_temporario = None
+
+# Comando principal
 def executar_comandos(codigo_graficalc, variaveis_sessao, caminho_arquivo=None):
     global resultados_execucao, variaveis, caminho_arquivo_upload_temporario
 
     resultados_execucao = []
     variaveis = variaveis_sessao
-    caminho_arquivo_upload_temporario = caminho_arquivo # Define o caminho para a execução atual
+    caminho_arquivo_upload_temporario = caminho_arquivo 
 
     parser.parse(codigo_graficalc, lexer=lexer)
 
-    caminho_arquivo_upload_temporario = None # Limpa a variável global
+    caminho_arquivo_upload_temporario = None 
     return resultados_execucao, variaveis
 
-
+# Apenas para evitar problemas
 def safe_read_json(value):
-    """
-    Lê JSON vindo de um caminho de ficheiro ou de uma string literal JSON.
-    - Se 'value' for caminho de ficheiro existente -> pd.read_json(path)
-    - Senão, assume que é JSON literal e usa StringIO(value)
-    """
     if isinstance(value, str):
-        # caminho existente (arquivo local)
         if os.path.exists(value):
             return pd.read_json(value)
-        # provável JSON literal: começa por '{' ou '[' (após espaços)
         stripped = value.lstrip()
         if stripped.startswith('{') or stripped.startswith('['):
             return pd.read_json(io.StringIO(value))
-    # fallback: tenta usar read_json diretamente (pode lançar)
     return pd.read_json(value)
 
