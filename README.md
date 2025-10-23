@@ -160,12 +160,12 @@ graficalc/
 ├── interpreter/            
 │   ├── migrations/
 │   ├── static/
-│   │	 └── interpreter/
-│   │	 	  └── css/
-│   │	 	  	   └── style.css/           
+│   │    └── interpreter/
+│   │         └── css/
+│   │              └── style.css           
 │   ├── templates/          
-│   │   └── interpreter/
-│   │       └── interface.html  
+│   │    └── interpreter/
+│   │         └── interface.html  
 │   ├── __init__.py
 │   ├── admin.py
 │   ├── apps.py
@@ -176,4 +176,4 @@ graficalc/
 │   └── views.py
 ├── requirements.txt                                                       
 ├── manage.py               
-└── README.md   
+└── README.md
