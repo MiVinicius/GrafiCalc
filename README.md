@@ -54,8 +54,8 @@ Para executar este projeto localmente, siga os passos abaixo.
 
 1.  **Clone o repositório:**
     ```bash
-    git clone [https://github.com/seu-usuario/projeto_graficalc.git](https://github.com/seu-usuario/projeto_graficalc.git)
-    cd projeto_graficalc
+    git clone [https://github.com/MiVinicius/GrafiCalc](https://github.com/MiVinicius/GrafiCalc.git)
+    cd graficalc_project
     ```
 
 2.  **Crie e ative um ambiente virtual:**
