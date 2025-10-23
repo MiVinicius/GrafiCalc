@@ -41,7 +41,7 @@ def t_newline(t):
     r'\n+'
     t.lexer.lineno += len(t.value)
 
-t_ignore = ' \t'
+t_ignore = ' \t\r'
 
 def t_error(t):
     error_msg = f"Caractere ilegal encontrado: '{t.value[0]}'"
@@ -184,7 +184,7 @@ def p_comando_plotar(p):
         return
 
     try:
-        plt.figure() 
+        plt.figure(figsize=(12, 5)) 
         if tipo_grafico.upper() == 'BARRAS':
             plt.bar(df[coluna_x], df[coluna_y])
         elif tipo_grafico.upper() == 'LINHAS':
